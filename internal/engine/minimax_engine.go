@@ -33,7 +33,7 @@ func (e *MinimaxEngine) NextMove(game *chess.Game) (string, error) {
 
 func (e *MinimaxEngine) selectBestMove(moves []ScoredMove) *chess.Move {
 	bestMoves := make([]ScoredMove, 0)
-	bestScore := math.MaxFloat64
+	var bestScore float32 = math.MaxFloat32
 
 	for _, move := range moves {
 		if move.Score == bestScore {
@@ -85,7 +85,7 @@ func displayScore(move ScoredMove, pos *chess.Position) {
 	fmt.Printf("move: %s. score: %f%s\n", moveStr, move.Score, pos.Board().Draw())
 }
 
-func displayBestMoves(score float64, moves []ScoredMove) {
+func displayBestMoves(score float32, moves []ScoredMove) {
 	fmt.Printf("best score: %.2f. moves:\n", score)
 	for i, m := range moves {
 		fmt.Printf("%d. %s\n", i+1, m)

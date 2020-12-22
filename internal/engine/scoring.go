@@ -6,7 +6,7 @@ import (
 	"github.com/notnil/chess"
 )
 
-var pieceValues map[chess.PieceType]float64 = map[chess.PieceType]float64{
+var pieceValues map[chess.PieceType]float32 = map[chess.PieceType]float32{
 	chess.Pawn:   1,
 	chess.Knight: 3,
 	chess.Bishop: 3,
@@ -18,7 +18,7 @@ var pieceValues map[chess.PieceType]float64 = map[chess.PieceType]float64{
 // ScoredMove represents a move and the score that has been assigned to it.
 type ScoredMove struct {
 	Move  *chess.Move
-	Score float64
+	Score float32
 }
 
 func (m ScoredMove) String() string {
@@ -26,9 +26,9 @@ func (m ScoredMove) String() string {
 }
 
 // Score returns a score evaluating a chess possition
-func Score(pos *chess.Position) float64 {
+func Score(pos *chess.Position) float32 {
 	board := pos.Board().SquareMap()
-	var score float64
+	var score float32
 
 	for square, piece := range board {
 		score += scorePiece(piece, square)
@@ -37,8 +37,8 @@ func Score(pos *chess.Position) float64 {
 	return score
 }
 
-func scorePiece(piece chess.Piece, square chess.Square) float64 {
-	var coeff float64 = 1
+func scorePiece(piece chess.Piece, square chess.Square) float32 {
+	var coeff float32 = 1
 	if piece.Color() == chess.Black {
 		coeff = -1
 	}

@@ -110,6 +110,7 @@ func draw(game *chess.Game) {
 
 func summarizeGame(game *chess.Game) {
 	fmt.Println("\nGame ended")
+	fmt.Println("----------")
 	outcome := "Draw"
 	if game.Outcome() == chess.WhiteWon {
 		outcome = "White won"
@@ -117,9 +118,9 @@ func summarizeGame(game *chess.Game) {
 		outcome = "Black won"
 	}
 
-	fmt.Printf("%s by %s\n", outcome, game.Method())
+	fmt.Printf("%s by %s\n\n", outcome, game.Method())
 
-	fmt.Println("Moves")
+	fmt.Printf("Moves:")
 	fmt.Println(game)
 }
 

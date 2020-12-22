@@ -10,17 +10,35 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+const (
+	displayModeDraw    = "draw"
+	displayModeCommand = "command"
+)
+
+var (
+	gameDisplayMode = ""
+)
+
 func createGameCommand(app *App) *cli.Command {
 	return &cli.Command{
 		Name:   "game",
 		Usage:  "Creates a new game",
 		Action: app.createGame,
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:        "display-mode",
+				Aliases:     []string{"m"},
+				Usage:       fmt.Sprintf("Method to display the state of the game. Options: %s, %s", displayModeDraw, displayModeCommand),
+				Value:       displayModeDraw,
+				Destination: &gameDisplayMode,
+			},
+		},
 	}
 }
 
 func (a *App) createGame(c *cli.Context) error {
 	game := a.gameSvc.NewGame()
-	engine := &engine.RandomEngine{}
+	engine := &engine.MinimaxEngine{}
 	startGame(game, engine)
 
 	return nil
@@ -28,6 +46,9 @@ func (a *App) createGame(c *cli.Context) error {
 
 func startGame(game *chess.Game, engine engine.Interface) {
 	fmt.Println("Started game")
+	if gameDisplayMode == displayModeDraw {
+		draw(game)
+	}
 
 	for {
 		ended := runPly(game, engine)
@@ -41,7 +62,6 @@ func startGame(game *chess.Game, engine engine.Interface) {
 
 func runPly(game *chess.Game, engine engine.Interface) bool {
 	if whiteToMove(game) {
-		draw(game)
 		getMove(game)
 	} else {
 		generateMove(game, engine)
@@ -55,7 +75,7 @@ func getMove(game *chess.Game) {
 
 	err := game.MoveStr(input)
 	if err != nil {
-		fmt.Printf("Invalid move %s. Reason: %v\n", input, err)
+		fmt.Printf("Invalid move %s please try again\n\n", input)
 		getMove(game)
 	}
 }
@@ -72,6 +92,16 @@ func generateMove(game *chess.Game, engine engine.Interface) {
 		panic(err)
 	}
 	time.Sleep(200 * time.Millisecond)
+	displayGeneratedMove(move, game)
+}
+
+func displayGeneratedMove(move string, game *chess.Game) {
+	if gameDisplayMode == displayModeDraw {
+		draw(game)
+		return
+	}
+
+	fmt.Printf("Blacks move: %s\n\n", move)
 }
 
 func draw(game *chess.Game) {
@@ -79,7 +109,15 @@ func draw(game *chess.Game) {
 }
 
 func summarizeGame(game *chess.Game) {
-	fmt.Printf("%s by %s\n", game.Outcome(), game.Method())
+	fmt.Println("\nGame ended")
+	outcome := "Draw"
+	if game.Outcome() == chess.WhiteWon {
+		outcome = "White won"
+	} else if game.Outcome() == chess.BlackWon {
+		outcome = "Black won"
+	}
+
+	fmt.Printf("%s by %s\n", outcome, game.Method())
 
 	fmt.Println("Moves")
 	fmt.Println(game)

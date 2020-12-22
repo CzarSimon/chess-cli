@@ -13,6 +13,8 @@ var (
 	ErrNoValidMove = fmt.Errorf("no valid moves")
 )
 
+var algebraicNotation = chess.AlgebraicNotation{}
+
 // Interface chess engine interface.
 type Interface interface {
 	NextMove(game *chess.Game) (string, error)
@@ -33,9 +35,7 @@ func (e *RandomEngine) NextMove(game *chess.Game) (string, error) {
 	}
 
 	moveIdx := rand.Intn(len(moves))
-	move := moves[moveIdx]
-
-	return move.String(), nil
+	return encodeMove(game, moves[moveIdx]), nil
 }
 
 func (e *RandomEngine) seed() {
@@ -44,4 +44,8 @@ func (e *RandomEngine) seed() {
 	}
 
 	rand.Seed(time.Now().UnixNano())
+}
+
+func encodeMove(game *chess.Game, move *chess.Move) string {
+	return algebraicNotation.Encode(game.Position(), move)
 }

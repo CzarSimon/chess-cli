@@ -7,5 +7,5 @@ type GameService struct{}
 
 // NewGame creates a new chess game.
 func (gs *GameService) NewGame() *chess.Game {
-	return chess.NewGame(chess.UseNotation(chess.LongAlgebraicNotation{}))
+	return chess.NewGame()
 }

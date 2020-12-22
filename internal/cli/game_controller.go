@@ -10,37 +10,6 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-type turn bool
-
-func (t turn) String() string {
-	if t == white {
-		return "White"
-	}
-
-	return "Black"
-}
-
-func (t turn) Int() int {
-	if t == white {
-		return 0
-	}
-
-	return 1
-}
-
-func (t turn) Explain() string {
-	return fmt.Sprintf("%s to move", t)
-}
-
-func (t turn) Next() turn {
-	return !t
-}
-
-const (
-	white turn = false
-	black turn = true
-)
-
 func createGameCommand(app *App) *cli.Command {
 	return &cli.Command{
 		Name:   "game",
@@ -59,39 +28,39 @@ func (a *App) createGame(c *cli.Context) error {
 
 func startGame(game *chess.Game, engine engine.Interface) {
 	fmt.Println("Started game")
-	currentTurn := white
 
 	for {
-		ended := runPly(currentTurn, game, engine)
+		ended := runPly(game, engine)
 		if ended {
 			break
 		}
-
-		currentTurn = currentTurn.Next()
 	}
+
+	summarizeGame(game)
 }
 
-func runPly(t turn, game *chess.Game, engine engine.Interface) bool {
-	if t == white {
+func runPly(game *chess.Game, engine engine.Interface) bool {
+	if whiteToMove(game) {
 		draw(game)
-		getMove(t, game)
+		getMove(game)
 	} else {
-		generateMove(t, game, engine)
+		generateMove(game, engine)
 	}
 
 	return game.Outcome() != chess.NoOutcome
 }
 
-func getMove(t turn, game *chess.Game) {
-	input := clio.MustGet(t.Explain())
+func getMove(game *chess.Game) {
+	input := clio.MustGet(explainTurn(game))
+
 	err := game.MoveStr(input)
 	if err != nil {
 		fmt.Printf("Invalid move %s. Reason: %v\n", input, err)
-		getMove(t, game)
+		getMove(game)
 	}
 }
 
-func generateMove(t turn, game *chess.Game, engine engine.Interface) {
+func generateMove(game *chess.Game, engine engine.Interface) {
 	move, err := engine.NextMove(game)
 	if err != nil {
 		panic(err)
@@ -107,4 +76,19 @@ func generateMove(t turn, game *chess.Game, engine engine.Interface) {
 
 func draw(game *chess.Game) {
 	fmt.Println(game.Position().Board().Draw())
+}
+
+func summarizeGame(game *chess.Game) {
+	fmt.Printf("%s by %s\n", game.Outcome(), game.Method())
+
+	fmt.Println("Moves")
+	fmt.Println(game)
+}
+
+func whiteToMove(game *chess.Game) bool {
+	return game.Position().Turn() == chess.White
+}
+
+func explainTurn(game *chess.Game) string {
+	return fmt.Sprintf("%s to move", game.Position().Turn().Name())
 }

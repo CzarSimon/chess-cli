@@ -38,7 +38,7 @@ func createGameCommand(app *App) *cli.Command {
 
 func (a *App) createGame(c *cli.Context) error {
 	game := a.gameSvc.NewGame()
-	engine := &engine.MinimaxEngine{}
+	engine := &engine.MinimaxEngine{Depth: 2}
 	startGame(game, engine)
 
 	return nil

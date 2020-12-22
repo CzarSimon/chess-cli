@@ -6,13 +6,59 @@ import (
 	"github.com/notnil/chess"
 )
 
+type squareValues map[chess.Square]float32
+
 var pieceValues map[chess.PieceType]float32 = map[chess.PieceType]float32{
-	chess.Pawn:   1,
-	chess.Knight: 3,
-	chess.Bishop: 3,
-	chess.Rook:   5,
-	chess.Queen:  9,
+	chess.Pawn:   10,
+	chess.Knight: 30,
+	chess.Bishop: 30,
+	chess.Rook:   50,
+	chess.Queen:  90,
 	chess.King:   900,
+}
+
+var whitePawnValues = squareValues{
+	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
+	chess.A7: 5.0, chess.B7: 5.0, chess.C7: 5.0, chess.D7: 5.0, chess.E7: 5.0, chess.F7: 5.0, chess.G7: 5.0, chess.H7: 5.0,
+	chess.A6: 1.0, chess.B6: 1.0, chess.C6: 2.0, chess.D6: 3.0, chess.E6: 3.0, chess.F6: 2.0, chess.G6: 1.0, chess.H6: 1.0,
+	chess.A5: 0.5, chess.B5: 0.5, chess.C5: 1.0, chess.D5: 2.5, chess.E5: 2.5, chess.F5: 1.0, chess.G5: 0.5, chess.H5: 0.5,
+	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 2.0, chess.E4: 2.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
+	chess.A3: 0.5, chess.B3: -0.5, chess.C3: -1.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: -1.0, chess.G3: -0.5, chess.H3: 0.5,
+	chess.A2: 0.5, chess.B2: 1.0, chess.C2: 1.0, chess.D2: -2.0, chess.E2: -2.0, chess.F2: 1.0, chess.G2: 1.0, chess.H2: 0.5,
+	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+}
+
+var blackPawnValues = squareValues{
+	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
+	chess.A7: 0.5, chess.B7: 1.0, chess.C7: 1.0, chess.D7: -2.0, chess.E7: -2.0, chess.F7: 1.0, chess.G7: 1.0, chess.H7: 5.0,
+	chess.A6: 0.5, chess.B6: -0.5, chess.C6: -1.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: -1.0, chess.G6: -0.5, chess.H6: 0.5,
+	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 2.0, chess.E5: 2.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
+	chess.A4: 0.5, chess.B4: 0.5, chess.C4: 1.0, chess.D4: 2.5, chess.E4: 2.5, chess.F4: 1.0, chess.G4: 0.5, chess.H4: 0.5,
+	chess.A3: 1.0, chess.B3: 1.0, chess.C3: 2.0, chess.D3: 3.0, chess.E3: 3.0, chess.F3: 2.0, chess.G3: 1.0, chess.H3: 1.0,
+	chess.A2: 5.0, chess.B2: 5.0, chess.C2: 5.0, chess.D2: 5.0, chess.E2: 5.0, chess.F2: 5.0, chess.G2: 5.0, chess.H2: 5.0,
+	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+}
+
+var blackKnightValues = squareValues{
+	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
+	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
+	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
+	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
+	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
+	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
+	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
+	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+}
+
+var whiteKnightValues = squareValues{
+	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
+	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
+	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
+	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
+	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
+	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
+	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
+	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
 }
 
 // ScoredMove represents a move and the score that has been assigned to it.
@@ -39,12 +85,37 @@ func Score(pos *chess.Position) float32 {
 
 func scorePiece(piece chess.Piece, square chess.Square) float32 {
 	var coeff float32 = 1
+	color := piece.Color()
 	if piece.Color() == chess.Black {
 		coeff = -1
 	}
 
-	t := piece.Type()
-	pieceValue, _ := pieceValues[t]
+	var value float32
 
-	return coeff * pieceValue
+	t := piece.Type()
+	switch t {
+	case chess.Pawn:
+		value = calculatePawnValue(square, color)
+	default:
+		value = calculateDefaultValue(t)
+	}
+
+	return coeff * value
+}
+
+func calculatePawnValue(square chess.Square, color chess.Color) float32 {
+	pieceValue, _ := pieceValues[chess.Pawn]
+
+	if color == chess.Black {
+		squareValue, _ := blackPawnValues[square]
+		return pieceValue + squareValue
+	}
+
+	squareValue, _ := whitePawnValues[square]
+	return pieceValue + squareValue
+}
+
+func calculateDefaultValue(t chess.PieceType) float32 {
+	value, _ := pieceValues[t]
+	return value
 }

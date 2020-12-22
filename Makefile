@@ -1,2 +1,2 @@
 cli:
-	sh scripts/build-cli.sh
+	sh scripts/install-cli.sh

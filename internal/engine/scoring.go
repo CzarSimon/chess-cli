@@ -128,25 +128,25 @@ var blackQueenValues = squareValues{
 }
 
 var whiteKingValues = squareValues{
-	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
-	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
-	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
-	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
-	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
-	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
-	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
-	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+	chess.A8: -3.0, chess.B8: -4.0, chess.C8: -4.0, chess.D8: -5.0, chess.E8: -5.0, chess.F8: -4.0, chess.G8: -4.0, chess.H8: -3.0,
+	chess.A7: -3.0, chess.B7: -4.0, chess.C7: -4.0, chess.D7: -5.0, chess.E7: -5.0, chess.F7: -4.0, chess.G7: -4.0, chess.H7: -3.0,
+	chess.A6: -3.0, chess.B6: -4.0, chess.C6: -4.0, chess.D6: -5.0, chess.E6: -5.0, chess.F6: -4.0, chess.G6: -4.0, chess.H6: -3.0,
+	chess.A5: -3.0, chess.B5: -4.0, chess.C5: -4.0, chess.D5: -5.0, chess.E5: -5.0, chess.F5: -4.0, chess.G5: -4.0, chess.H5: -3.0,
+	chess.A4: -2.0, chess.B4: -3.0, chess.C4: -3.0, chess.D4: -4.0, chess.E4: -4.0, chess.F4: -3.0, chess.G4: -3.0, chess.H4: -2.0,
+	chess.A3: -1.0, chess.B3: -2.0, chess.C3: -2.0, chess.D3: -2.0, chess.E3: -2.0, chess.F3: -2.0, chess.G3: -2.0, chess.H3: -1.0,
+	chess.A2: 2.0, chess.B2: 2.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 2.0, chess.H2: 2.0,
+	chess.A1: 2.0, chess.B1: 3.0, chess.C1: 1.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 1.0, chess.G1: 3.0, chess.H1: 2.0,
 }
 
 var blackKingValues = squareValues{
-	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
-	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
-	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
-	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
-	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
-	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
-	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
-	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+	chess.A8: 2.0, chess.B8: 3.0, chess.C8: 1.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 1.0, chess.G8: 3.0, chess.H8: 2.0,
+	chess.A7: 2.0, chess.B7: 2.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 2.0, chess.H7: 2.0,
+	chess.A6: -1.0, chess.B6: -2.0, chess.C6: -2.0, chess.D6: -2.0, chess.E6: -2.0, chess.F6: -2.0, chess.G6: -2.0, chess.H6: -1.0,
+	chess.A5: -2.0, chess.B5: -3.0, chess.C5: -3.0, chess.D5: -4.0, chess.E5: -4.0, chess.F5: -3.0, chess.G5: -3.0, chess.H5: -2.0,
+	chess.A4: -3.0, chess.B4: -4.0, chess.C4: -4.0, chess.D4: -5.0, chess.E4: -5.0, chess.F4: -4.0, chess.G4: -4.0, chess.H4: -3.0,
+	chess.A3: -3.0, chess.B3: -4.0, chess.C3: -4.0, chess.D3: -5.0, chess.E3: -5.0, chess.F3: -4.0, chess.G3: -4.0, chess.H3: -3.0,
+	chess.A2: -3.0, chess.B2: -4.0, chess.C2: -4.0, chess.D2: -5.0, chess.E2: -5.0, chess.F2: -4.0, chess.G2: -4.0, chess.H2: -3.0,
+	chess.A1: -3.0, chess.B1: -4.0, chess.C1: -4.0, chess.D1: -5.0, chess.E1: -5.0, chess.F1: -4.0, chess.G1: -4.0, chess.H1: -3.0,
 }
 
 // ScoredMove represents a move and the score that has been assigned to it.

@@ -106,25 +106,25 @@ var blackRookValues = squareValues{
 }
 
 var whiteQueenValues = squareValues{
-	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
-	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
-	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
-	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
-	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
-	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
-	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
-	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+	chess.A8: -2.0, chess.B8: -1.0, chess.C8: -1.0, chess.D8: -0.5, chess.E8: -0.5, chess.F8: -1.0, chess.G8: -1.0, chess.H8: -2.0,
+	chess.A7: -1.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: -1.0,
+	chess.A6: -1.0, chess.B6: 0.0, chess.C6: 0.5, chess.D6: 0.5, chess.E6: 0.5, chess.F6: 0.5, chess.G6: 0.0, chess.H6: -1.0,
+	chess.A5: -0.5, chess.B5: 0.0, chess.C5: 0.5, chess.D5: 0.5, chess.E5: 0.5, chess.F5: 0.5, chess.G5: 0.0, chess.H5: -0.5,
+	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.5, chess.D4: 0.5, chess.E4: 0.5, chess.F4: 0.5, chess.G4: 0.0, chess.H4: -0.5,
+	chess.A3: -1.0, chess.B3: 0.0, chess.C3: 0.5, chess.D3: 0.5, chess.E3: 0.5, chess.F3: 0.5, chess.G3: 0.0, chess.H3: -1.0,
+	chess.A2: -1.0, chess.B2: 0.0, chess.C2: 0.5, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: -1.0,
+	chess.A1: -2.0, chess.B1: -1.0, chess.C1: -1.0, chess.D1: -0.5, chess.E1: -0.5, chess.F1: -1.0, chess.G1: -1.0, chess.H1: -2.0,
 }
 
 var blackQueenValues = squareValues{
-	chess.A8: 0.0, chess.B8: 0.0, chess.C8: 0.0, chess.D8: 0.0, chess.E8: 0.0, chess.F8: 0.0, chess.G8: 0.0, chess.H8: 0.0,
-	chess.A7: 0.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.0, chess.G7: 0.0, chess.H7: 0.0,
-	chess.A6: 0.0, chess.B6: 0.0, chess.C6: 0.0, chess.D6: 0.0, chess.E6: 0.0, chess.F6: 0.0, chess.G6: 0.0, chess.H6: 0.0,
-	chess.A5: 0.0, chess.B5: 0.0, chess.C5: 0.0, chess.D5: 0.0, chess.E5: 0.0, chess.F5: 0.0, chess.G5: 0.0, chess.H5: 0.0,
-	chess.A4: 0.0, chess.B4: 0.0, chess.C4: 0.0, chess.D4: 0.0, chess.E4: 0.0, chess.F4: 0.0, chess.G4: 0.0, chess.H4: 0.0,
-	chess.A3: 0.0, chess.B3: 0.0, chess.C3: 0.0, chess.D3: 0.0, chess.E3: 0.0, chess.F3: 0.0, chess.G3: 0.0, chess.H3: 0.0,
-	chess.A2: 0.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: 0.0,
-	chess.A1: 0.0, chess.B1: 0.0, chess.C1: 0.0, chess.D1: 0.0, chess.E1: 0.0, chess.F1: 0.0, chess.G1: 0.0, chess.H1: 0.0,
+	chess.A8: -2.0, chess.B8: -1.0, chess.C8: -1.0, chess.D8: -0.5, chess.E8: -0.5, chess.F8: -1.0, chess.G8: -1.0, chess.H8: -2.0,
+	chess.A7: -1.0, chess.B7: 0.0, chess.C7: 0.0, chess.D7: 0.0, chess.E7: 0.0, chess.F7: 0.5, chess.G7: 0.0, chess.H7: -1.0,
+	chess.A6: -1.0, chess.B6: 0.0, chess.C6: 0.5, chess.D6: 0.5, chess.E6: 0.5, chess.F6: 0.5, chess.G6: 0.0, chess.H6: -1.0,
+	chess.A5: -0.5, chess.B5: 0.0, chess.C5: 0.5, chess.D5: 0.5, chess.E5: 0.5, chess.F5: 0.5, chess.G5: 0.0, chess.H5: 0.0,
+	chess.A4: -0.5, chess.B4: 0.0, chess.C4: 0.5, chess.D4: 0.5, chess.E4: 0.5, chess.F4: 0.5, chess.G4: 0.0, chess.H4: -0.5,
+	chess.A3: -1.0, chess.B3: 0.0, chess.C3: 0.5, chess.D3: 0.5, chess.E3: 0.5, chess.F3: 0.5, chess.G3: 0.0, chess.H3: -1.0,
+	chess.A2: -1.0, chess.B2: 0.0, chess.C2: 0.0, chess.D2: 0.0, chess.E2: 0.0, chess.F2: 0.0, chess.G2: 0.0, chess.H2: -1.0,
+	chess.A1: -2.0, chess.B1: -1.0, chess.C1: -1.0, chess.D1: -0.5, chess.E1: -0.5, chess.F1: -1.0, chess.G1: -1.0, chess.H1: -2.0,
 }
 
 var whiteKingValues = squareValues{

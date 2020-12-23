@@ -13,7 +13,7 @@ import (
 // MinimaxEngine implementation of a chess engine that uses
 // minimax tree search to evaluate which next move is the best.
 type MinimaxEngine struct {
-	Depth  int
+	Depth  uint
 	Seed   int64
 	seeded bool
 }
@@ -25,7 +25,7 @@ func (e *MinimaxEngine) NextMove(game *chess.Game) (string, error) {
 		return "", ErrNoValidMove
 	}
 
-	scoredMoves := scoreMoves(game, moves)
+	scoredMoves := scoreMoves(game.Position(), moves, e.Depth)
 	bestMove := e.selectBestMove(scoredMoves)
 
 	return chessutil.EncodeMove(game, bestMove), nil
@@ -50,10 +50,47 @@ func (e *MinimaxEngine) selectBestMove(moves []ScoredMove) *chess.Move {
 	return bestMoves[moveIdx].Move
 }
 
-func scoreMoves(game *chess.Game, moves []*chess.Move) []ScoredMove {
+func scoreMoves(pos *chess.Position, moves []*chess.Move, depth uint) []ScoredMove {
+	if depth == 0 {
+		return scorePositions(pos, moves)
+	}
+
+	scores := make([]ScoredMove, len(moves))
+	for i, move := range moves {
+		nextPos := pos.Update(move)
+		nextMoves := pos.ValidMoves()
+		if len(nextMoves) == 0 {
+			scores[i] = ScoredMove{
+				Move:  move,
+				Score: Score(nextPos),
+			}
+			continue
+		}
+
+		nextScores := scoreMoves(nextPos, nextMoves, depth-1)
+		scores[i] = selectHighestScoredMove(nextScores)
+	}
+
+	return scores
+}
+
+func selectHighestScoredMove(moves []ScoredMove) ScoredMove {
+	bestMove := moves[0]
+	bestScore := moves[0].Score
+
+	for _, move := range moves {
+		if move.Score > bestScore {
+			bestMove = move
+			bestScore = move.Score
+		}
+	}
+
+	return bestMove
+}
+
+func scorePositions(pos *chess.Position, moves []*chess.Move) []ScoredMove {
 	scores := make([]ScoredMove, len(moves))
 
-	pos := game.Position()
 	for i, move := range moves {
 		next := pos.Update(move)
 		score := ScoredMove{
@@ -61,7 +98,6 @@ func scoreMoves(game *chess.Game, moves []*chess.Move) []ScoredMove {
 			Score: Score(next),
 		}
 		scores[i] = score
-		// displayScore(score, next)
 	}
 
 	return scores

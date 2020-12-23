@@ -13,10 +13,12 @@ import (
 const (
 	displayModeDraw    = "draw"
 	displayModeCommand = "command"
+	defaultSearchDepth = 3
 )
 
 var (
 	gameDisplayMode = ""
+	searchDepth     uint
 )
 
 func createGameCommand(app *App) *cli.Command {
@@ -32,13 +34,20 @@ func createGameCommand(app *App) *cli.Command {
 				Value:       displayModeDraw,
 				Destination: &gameDisplayMode,
 			},
+			&cli.UintFlag{
+				Name:        "search-depth",
+				Aliases:     []string{"depth", "d"},
+				Usage:       fmt.Sprintf("Depth with which to search possible moves"),
+				Value:       defaultSearchDepth,
+				Destination: &searchDepth,
+			},
 		},
 	}
 }
 
 func (a *App) createGame(c *cli.Context) error {
 	game := a.gameSvc.NewGame()
-	engine := &engine.MinimaxEngine{Depth: 2}
+	engine := &engine.MinimaxEngine{Depth: searchDepth}
 	startGame(game, engine)
 
 	return nil

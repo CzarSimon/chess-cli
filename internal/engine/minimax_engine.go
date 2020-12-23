@@ -25,7 +25,8 @@ func (e *MinimaxEngine) NextMove(game *chess.Game) (string, error) {
 		return "", ErrNoValidMove
 	}
 
-	scoredMoves := scoreMoves(game.Position(), moves, e.Depth)
+	maximizeScore := game.Position().Turn() == chess.White
+	scoredMoves := scoreMoves(game.Position(), moves, e.Depth, maximizeScore)
 	bestMove := e.selectBestMove(scoredMoves)
 
 	return chessutil.EncodeMove(game, bestMove), nil
@@ -50,28 +51,43 @@ func (e *MinimaxEngine) selectBestMove(moves []ScoredMove) *chess.Move {
 	return bestMoves[moveIdx].Move
 }
 
-func scoreMoves(pos *chess.Position, moves []*chess.Move, depth uint) []ScoredMove {
-	if depth == 0 {
+func scoreMoves(pos *chess.Position, moves []*chess.Move, depth uint, maximize bool) []ScoredMove {
+	// fmt.Printf("depth: %d maximize: %v\n", depth, maximize)
+	if depth < 1 {
 		return scorePositions(pos, moves)
 	}
 
 	scores := make([]ScoredMove, len(moves))
 	for i, move := range moves {
-		nextPos := pos.Update(move)
-		nextMoves := pos.ValidMoves()
-		if len(nextMoves) == 0 {
-			scores[i] = ScoredMove{
-				Move:  move,
-				Score: Score(nextPos),
-			}
-			continue
-		}
-
-		nextScores := scoreMoves(nextPos, nextMoves, depth-1)
-		scores[i] = selectHighestScoredMove(nextScores)
+		scores[i] = scoreNextPosition(pos, move, depth, maximize)
 	}
 
 	return scores
+}
+
+func scoreNextPosition(pos *chess.Position, move *chess.Move, depth uint, maximize bool) ScoredMove {
+	next := pos.Update(move)
+	moves := pos.ValidMoves()
+	if len(moves) == 0 {
+		return ScoredMove{
+			Move:  move,
+			Score: Score(pos),
+		}
+	}
+
+	nextScores := scoreMoves(next, moves, depth-1, !maximize)
+	return ScoredMove{
+		Move:  move,
+		Score: selectBestMove(nextScores, maximize).Score,
+	}
+}
+
+func selectBestMove(moves []ScoredMove, maximize bool) ScoredMove {
+	if maximize {
+		return selectHighestScoredMove(moves)
+	}
+
+	return selectLowestScoredMove(moves)
 }
 
 func selectHighestScoredMove(moves []ScoredMove) ScoredMove {
@@ -80,6 +96,20 @@ func selectHighestScoredMove(moves []ScoredMove) ScoredMove {
 
 	for _, move := range moves {
 		if move.Score > bestScore {
+			bestMove = move
+			bestScore = move.Score
+		}
+	}
+
+	return bestMove
+}
+
+func selectLowestScoredMove(moves []ScoredMove) ScoredMove {
+	bestMove := moves[0]
+	bestScore := moves[0].Score
+
+	for _, move := range moves {
+		if move.Score < bestScore {
 			bestMove = move
 			bestScore = move.Score
 		}

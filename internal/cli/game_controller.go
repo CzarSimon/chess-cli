@@ -2,7 +2,6 @@ package cli
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/CzarSimon/chess-cli/internal/engine"
 	"github.com/CzarSimon/chess-cli/pkg/clio"
@@ -100,7 +99,7 @@ func generateMove(game *chess.Game, engine engine.Interface) {
 		fmt.Printf("Invalid move %s. Reason: %v\n", move, err)
 		panic(err)
 	}
-	time.Sleep(200 * time.Millisecond)
+
 	displayGeneratedMove(move, game)
 }
 
